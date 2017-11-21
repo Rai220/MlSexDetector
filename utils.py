@@ -37,8 +37,8 @@ def word2input(word, maxsize):
     input += [sparse(dictSize - 1, dictSize)] * (maxsize - len(input))
     return list(input)
 
-def loadFile(sound_dict_path):
-    with open(sound_dict_path) as fp:
+def loadFile(file):
+    with open(file) as fp:
         data = csv.reader(fp, delimiter=',')
         data = list(data)
         return data
