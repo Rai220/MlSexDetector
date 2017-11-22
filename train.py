@@ -26,7 +26,7 @@ conv2 = Conv1D(200, 3, strides=1, padding='same', dilation_rate=1, activation='r
               kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None,
               kernel_constraint=None, bias_constraint=None)(main_input)
 
-lstm = LSTM(128)(main_input)
+lstm = LSTM(256)(main_input)
 
 
 added = Concatenate()([conv, conv2])
@@ -37,7 +37,7 @@ f = Flatten()(p)
 added2 = Concatenate()([f, lstm])
 
 d = Dropout(0.2, noise_shape=None, seed=None)(added2)
-hidden = Dense(128, activation='relu')(d)
+hidden = Dense(256, activation='relu')(d)
 d = Dropout(0.5, noise_shape=None, seed=None)(hidden)
 # hidden = Dense(1024, activation='relu')(d)
 # d = Dropout(0.5, noise_shape=None, seed=None)(hidden)
@@ -49,8 +49,8 @@ model = Model(input=[main_input], output=[sex])
 model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
-data = loadFile("dataMini.csv")
-for i in range(1, 10):
+data = loadFile("data.csv")
+for i in range(1, 20):
     x_train, x_test, out_train, out_test = getPatch(data, 70000)
     lr = 0.001 / (i / 10)
     print("Epoch: " + str(i) + " lr: " + str(lr))
