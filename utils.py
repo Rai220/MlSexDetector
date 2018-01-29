@@ -38,7 +38,7 @@ def word2input(word, maxsize):
     return list(input)
 
 def loadFile(file):
-    with open(file) as fp:
+    with open(file, encoding='utf-8') as fp:
         data = csv.reader(fp, delimiter=',')
         data = list(data)
         return data
