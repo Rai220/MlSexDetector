@@ -9,6 +9,7 @@ import numpy as np
 from nltk.corpus import stopwords
 
 letters = "@ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789.,!? -"
+LETTERS_FOR_RANDOM = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789.,!?    -"
 dictSize = len(letters)  # 26 letters + eos
 
 SEX_DICT = {'unknown': 0, 'М': 1, 'Ж': 2}
@@ -58,14 +59,26 @@ def getPatch(data, count):
         if (row[3].strip() in SEX_DICT ):
             max_input = max(max_input, len(row[0]))
 
-            r = randint(0, 9)
+            r = randint(0, 10)
+            r2 = randint(0, 1)
             if r < 7:
-                if r < 3:
-                    text = (row[0] + " " + row[1] + " " + row[2]).strip()
-                elif r < 5:
-                    text = (row[0] + " " + row[1]).strip()
+                if r == 0:
+                    text = row[1].strip()
+                elif r < 4:
+                    if (r2 == 0):
+                        text = (row[0] + " " + row[1] + " " + row[2]).strip()
+                    else:
+                        text = (row[1] + " " + row[0] + " " + row[2]).strip()
+                elif r < 6:
+                    if (r2 == 0):
+                        text = (row[0] + " " + row[1]).strip()
+                    else:
+                        text = (row[1] + " " + row[0]).strip()
                 else:
-                    text = (row[1] + " " + row[2]).strip()
+                    if (r2 == 0):
+                        text = (row[1] + " " + row[2]).strip()
+                    else:
+                        text = (row[2] + " " + row[1]).strip()
 
                 if len(text) < 50:
                     input.append(word2input(text, 50))
@@ -75,6 +88,9 @@ def getPatch(data, count):
                     text = random.choice(stopWords)
                 elif r == 8:
                     text = random.choice(stopWords) + " " + random.choice(stopWords)
+                elif r == 9: # Random string
+                    N = r = randint(2, 15)
+                    text = ''.join(random.choices(LETTERS_FOR_RANDOM, k=N))
                 else:
                     text = random.choice(stopWords) + " " + random.choice(stopWords) + " " + random.choice(stopWords)
                 text = text.strip().upper()

@@ -6,8 +6,11 @@ from keras.layers import Dropout, Dense, Flatten, Conv1D, MaxPooling1D, Concaten
 from keras.optimizers import Adam
 from keras import backend as K
 import tensorflow as tf
+import nltk
 
 from utils import *
+
+nltk.download('stopwords')
 
 # Without LSTM: loss: 0.0070 - acc: 0.9987 - val_loss: 0.0103 - val_acc: 0.9982
 
@@ -50,10 +53,11 @@ model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
 data = loadFile("dataMini.csv")
-for i in range(1, 10):
+epoch_count = 5
+for i in range(1, epoch_count):
     x_train, x_test, out_train, out_test = getPatch(data, 70000)
-    lr = 0.001 / (i / 10)
-    print("Epoch: " + str(i) + " lr: " + str(lr))
+    lr = 0.001 / (i / epoch_count)
+    print("Global epoch: " + str(i) + " of " + str(epoch_count) + ", lr: " + str(lr))
     opt = Adam(lr=lr)
     model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 
