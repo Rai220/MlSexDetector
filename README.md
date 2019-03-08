@@ -25,6 +25,9 @@ Sex:  unknown
 [[  9.99970675e-01   2.07114244e-05   8.59489865e-06]]
 ```
 
+## Live demo on Google Colab
+Можно запустить копию данного проекта на Colab в один клик и саму обучить сеть с нуля: https://drive.google.com/file/d/1Gm5BN_R4JM6GhyOo4O63dPylrzyMCmPX/view?usp=sharing
+
 ## Retrain
 > python train.py
 
