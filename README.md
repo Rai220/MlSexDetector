@@ -26,7 +26,7 @@ Sex:  unknown
 ```
 
 ## Live demo on Google Colab
-Можно запустить копию данного проекта на Colab в один клик и саму обучить сеть с нуля: https://colab.research.google.com/drive/1Gm5BN_R4JM6GhyOo4O63dPylrzyMCmPX
+Можно запустить копию данного проекта на Colab: https://colab.research.google.com/drive/1Gm5BN_R4JM6GhyOo4O63dPylrzyMCmPX
 
 ## Retrain
 > python train.py
